@@ -28,19 +28,20 @@ git clone https://github.com/Mohammed-Taysser/lama-server.git
 # change directory
 cd lama-server
 
-# Make it your own
-rm -rf .git && git init && npm init
-
 # Install dependencies
 npm install
+# Or Using Yarn
+yarn
 
 # Create .env
 mv .env.example .env
 
 # Start The Development Server by one of the following
 npm start
-# OR
-node index.js
+# Or Using Yarn
+yarn start
+# OR Direct app.js
+node app.js
 ```
 
 ## Further reading 📖
