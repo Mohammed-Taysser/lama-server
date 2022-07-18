@@ -10,6 +10,7 @@ const hpp = require('hpp');
 require('dotenv').config();
 
 const statusCode = require('./utilities/statusCode');
+const authApiKey = require('./middleware/auth-api-key');
 
 const app = express();
 
@@ -60,6 +61,12 @@ app.use(
 		legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 	})
 );
+
+// here we validate the API key,
+// by mounting this middleware to /api
+// meaning only paths prefixed with "/api"
+// will cause this middleware to be invoked
+app.use('/api', authApiKey);
 
 // Connect To DB
 mongoose
