@@ -125,4 +125,4 @@ The line to look for is: **`Verifying deploy... done.`**
 
 MIT © `[author name](github-url)`
 
-[live-demo]: <https://papercuts-server.herokuapp.com/>
+[live-demo]: <https://lama-server-api.herokuapp.com/>
