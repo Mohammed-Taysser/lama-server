@@ -12,6 +12,10 @@ require('dotenv').config();
 const statusCode = require('./utilities/statusCode');
 const authApiKey = require('./middleware/auth-api-key');
 
+const usersRoutes = require('./routes/users.route');
+const authRoutes = require('./routes/auth.route');
+const postsRoutes = require('./routes/posts.route');
+
 const app = express();
 
 // Logger
@@ -69,7 +73,7 @@ app.use(
 app.use('/api', authApiKey);
 
 // Static Files
-app.use(express.static('assets'))
+app.use(express.static('assets'));
 
 // Connect To DB
 mongoose
@@ -79,11 +83,13 @@ mongoose
 			response.status(statusCode.success.ok).json({ status: 'OK' })
 		);
 
+		app.use('/api/auth', authRoutes);
+		app.use('/api/users', usersRoutes);
+		app.use('/api/posts', postsRoutes);
+
 		app.listen(PORT, () => {
 			console.log(`Lama Server listening on port:${PORT}`);
-			console.info(
-				`See: /api/health-check To Check Api Status`
-			);
+			console.info(`See: /api/health-check To Check Api Status`);
 		});
 	})
 	.catch((error) => {
