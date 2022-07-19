@@ -68,6 +68,9 @@ app.use(
 // will cause this middleware to be invoked
 app.use('/api', authApiKey);
 
+// Static Files
+app.use(express.static('assets'))
+
 // Connect To DB
 mongoose
 	.connect(MONGO_URL)
@@ -79,7 +82,7 @@ mongoose
 		app.listen(PORT, () => {
 			console.log(`Lama Server listening on port:${PORT}`);
 			console.info(
-				`See: http://localhost:8080/api/health-check To Check Api Status`
+				`See: /api/health-check To Check Api Status`
 			);
 		});
 	})
