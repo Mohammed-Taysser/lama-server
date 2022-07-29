@@ -4,15 +4,16 @@ require('dotenv').config();
 // eslint-disable-next-line no-undef
 const { JWT_SECRET_KEY = '', JWT_LIFE_TIME } = process.env;
 
-function generateToken(author) {
+function generateToken(user) {
 	'use strict';
 	return jwt.sign(
 		{
-			_id: author._id,
-			email: author.email,
-			username: author.username,
-			avatar: author.avatar,
-			role: author.role,
+			_id: user._id,
+			email: user.email,
+			name: user.firstName + ' ' + user.lastName,
+			username: user.username,
+			avatar: user.avatar,
+			role: user.role,
 		},
 		JWT_SECRET_KEY,
 		{
