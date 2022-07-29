@@ -12,7 +12,7 @@ const { API_KEYS = [] } = process.env;
 // will cause this middleware to be invoked
 
 module.exports = async (request, response, next) => {
-	const key = request.body['api-key'];
+	const key = request.headers['x-api-key'];
 
 	// key isn't present
 	if (!key) {

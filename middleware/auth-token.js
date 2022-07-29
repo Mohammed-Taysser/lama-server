@@ -3,7 +3,8 @@ const { verifyToken } = require('../utilities/jwt');
 
 module.exports = async (request, response, next) => {
 	'use strict';
-	const { token } = request.body;
+	const token = request.headers['authorization'];
+
 	if (token) {
 		await verifyToken(token, (error, user) => {
 			if (error) {
