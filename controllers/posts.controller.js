@@ -200,9 +200,17 @@ exports.timeline = async (request, response) => {
 		const friendPosts = await Promise.all(
 			user.following.map((friendId) => schema.find({ userId: friendId }))
 		);
-		response
-			.status(statusCode.success.ok)
-			.json(userPosts.concat(...friendPosts));
+		const allPosts = await Promise.all(
+			userPosts.concat(...friendPosts).map(async (post) => {
+				const publisher = await userSchema.find({ _id: post.userId });
+				return {
+					post,
+					publisher: publisher[0],
+				};
+			})
+		);
+
+		response.status(statusCode.success.ok).json(allPosts);
 	} catch (error) {
 		response.status(statusCode.error.serverError).json({ error });
 	}
